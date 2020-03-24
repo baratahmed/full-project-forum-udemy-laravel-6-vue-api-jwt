@@ -46,11 +46,11 @@
                .catch(err => console.log(err))
            },
            readIt(notification){
-             axios.post('/api/markAsRead',{id:notification.id})
+             axios.post("/api/markAsRead",{id:notification.id})
              .then(res => {
-               this.unread.splice(notification,1)
-               this.read.push(notification)
-               this.unreadCount--
+               this.unread.splice(notification,1);
+               this.read.push(notification);
+               this.unreadCount--;
              })
            }
         },
