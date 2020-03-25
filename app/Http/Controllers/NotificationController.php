@@ -7,6 +7,11 @@ use App\Http\Resources\NotificationResource;
 
 class NotificationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('jwt');
+        //$this->middleware('auth:api', ['except' => ['login']]);
+    }
     public function index(){
         return [
             'read' => NotificationResource::collection(auth()->user()->readNotifications),
