@@ -16,6 +16,14 @@
             :key="question.path"
             :data=question
           > </question>
+
+           <div class="text-center">
+              <v-pagination
+                v-model="meta.current_page"
+                :length="meta.last_page"
+                @input="changePage"
+              ></v-pagination>
+            </div>
         </v-card>
       </v-col>
 
@@ -44,17 +52,29 @@ import AppSidebar from './AppSidebar'
     export default {
             data(){
               return{
-                questions:{}
+                questions:{},
+                meta:{},
               }
             },
 
-            components:{Question,AppSidebar},
-            
+            components:{Question,AppSidebar},          
             created(){
-            axios.get('api/question')
-            .then(res => this.questions = res.data.data)
-            .catch(error => console.log(error.response.data))
-        }
+                this.fatchQuestions();
+            },
+            methods:{
+              fatchQuestions(page){
+                let url = page ? `/api/question?page=${page}` : '/api/question';
+                axios.get(url)
+                .then(res => {
+                  this.questions = res.data.data
+                  this.meta = res.data.meta
+                })
+                .catch(error => console.log(error.response.data))
+              },
+              changePage(page){
+                this.fatchQuestions(page)
+              }
+            },  
     }
 </script>
 
