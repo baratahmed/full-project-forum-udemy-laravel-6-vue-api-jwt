@@ -2,13 +2,15 @@
   <v-card
     color="green lighten-4"
     flat
-    height="200px"
+    height="48px"
     tile
   > 
-    <v-toolbar dense>
+    <v-toolbar dense color="indigo" dark>
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-      <v-toolbar-title>Tech Forum</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" class="white--text tech-logo">Tech Forum</router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <app-notification v-if="loggedIn"></app-notification>
@@ -54,5 +56,7 @@ import  AppNotification from './AppNotification'
 </script>
 
 <style>
-    
+    .tech-logo{
+      text-decoration: none;
+    }
 </style>
